@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {Button, Grid, TextField, Typography} from "@mui/material";
 import axios from "axios";
-// import Inputs from "./loginInputs";
 
 function Login(){
     const [userLogin, setLoginData] = useState({

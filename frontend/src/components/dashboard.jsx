@@ -7,7 +7,7 @@ import { ThemeProvider,createTheme } from "@mui/material";
 // import axios from "axios";
 
 function Dashboard(){
-
+    //use mui default table
     // function dataTable(id, itemName, itemQty, timeCreated){
     //     return {id, itemName, itemQty, timeCreated}
     // }
@@ -32,35 +32,42 @@ function Dashboard(){
             label : "ID",
             options : {
                 filter : true,
-                sort : true
+                sort : false
             }
         },{
             name : "itemName",
             label : "Item Name",
             options : {
                 filter : true,
-                sort : true
+                sort : false
             }
         },{
             name : "itemQTY",
             label : "Item Qty",
             options : {
                 filter : true,
-                sort : true
+                sort : false
             }
         },{
             name : "timeCreated",
             label : "Time Created",
             options : {
                 filter : true,
-                sort : true
+                sort : false
+            }
+        },{
+            name : "action",
+            label : "Action",
+            options : {
+                filter : false,
+                sort : false
             }
         }
     ];
     const options = {
         download : false,
         print : false,
-        viewColumns : false
+        selectableRows: false
       };
 
     const data = [

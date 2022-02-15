@@ -18,8 +18,6 @@ router.post("/", (req,res)=>{
             res.status(404).send("Incorrect Username or Password");
         }
     });
-
-
 });
 
 module.exports = router;

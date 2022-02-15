@@ -3,11 +3,6 @@ import { Route,BrowserRouter as Router, Routes , Navigate} from 'react-router-do
 import Login from './login.jsx';
 import Dashboard from './dashboard.jsx';
 
-// function Child(){
-//     let {id} = useParams();
-//     console.log(id);
-// }
-
 function AppRoutes(){
     return(
         <Router>

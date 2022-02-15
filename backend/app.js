@@ -11,6 +11,10 @@ const signin = require("./routes/signin");
 
 const app = express();
 dotenv.config();
+//local mongo db connection
+// mongoose.connect("mongodb://localhost:27017/user",(err)=>{;
+
+//mongobd atlas connection, get access using dotenv files
 mongoose.connect(`${process.env.MONGODB_ACCESS}`, (err)=>{
     if (err) {
         console.log(err);
@@ -18,41 +22,14 @@ mongoose.connect(`${process.env.MONGODB_ACCESS}`, (err)=>{
         console.log("success connect to database");
     }
 }); // 
-// mongoose.connect("mongodb://localhost:27017/user");
+
 app.use(express.json());
 app.use(cors());
 
 app.use("/signup", signup);
 app.use("/signin", signin);
 
-const  port = 5000;
-// const frontendDomain = "http://localhost:3000"
-
-// app.get("/",(req, res)=>{
-//     res.redirect(`${frontendDomain}/login`);
-// });
-
-// app.post("/loginverify", (req,res)=>{
-//     const loginUsername = req.body.Username;
-//     const loginPassword = req.body.Password;
-
-//     userModel.find({username : loginUsername}, (err, userData)=>{
-//         if(userData){
-//             if(userData.password = loginPassword){
-//                 res.status(200).redirect(`/dashboard`);
-//             }else{
-//                 console.log("wrong pwd");
-//             }
-//         }else{
-//             console.log(err);
-//         }
-//     });
-// });
-
-// app.get("/dashboard", (req,res)=>{
-//     res.redirect(`${frontendDomain}/dashboard`);
-// });
-
-app.listen(port, ()=>{
-    console.log(`listen from port ${port}`);
+//port listener, port using dotenv files
+app.listen(process.env.PORT, ()=>{
+    console.log(`listen from port ${process.env.PORT}`);
 });

@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 //required routes
 const signup = require("./routes/signup");
 const signin = require("./routes/signin");
+const itemCreation = require("./routes/item");
 
 const app = express();
 dotenv.config();
@@ -21,13 +22,14 @@ mongoose.connect(`${process.env.MONGODB_ACCESS}`, (err)=>{
     }else{
         console.log("success connect to database");
     }
-}); // 
+});
 
 app.use(express.json());
 app.use(cors());
 
 app.use("/signup", signup);
 app.use("/signin", signin);
+app.use("/item/", itemCreation);
 
 //port listener, port using dotenv files
 app.listen(process.env.PORT, ()=>{

@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MUIDataTable from "mui-datatables";
-import { ThemeProvider,createTheme } from "@mui/material";
+import { ThemeProvider,createTheme, Button, Grid } from "@mui/material";
+import axios from "axios";
 // import {Grid,Typography } from "@mui/material";
 //import { Button,Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 
-// import axios from "axios";
-
 function Dashboard(){
+    let [itemLists, setItemList] = useState([]);
+    useEffect(()=>{
+        axios.get("http://localhost:5000/item/getItemList").then((response)=>{
+            if(response.status === 200){
+                setItemList(response.data);
+            }
+        });
+    },[]);
+
     //use mui default table
     // function dataTable(id, itemName, itemQty, timeCreated){
     //     return {id, itemName, itemQty, timeCreated}
@@ -25,10 +33,28 @@ function Dashboard(){
     //     dataTable("10", "screw", 1, 1)
     // ]
     
-    //create table header data
+    //create table hard coded data using MUI DataTables
+    // const itemLists = [
+    //     {itemID : 1, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"},
+    //     {itemID : 2, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"},
+    //     {itemID : 3, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"},
+    //     {itemID : 4, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"},
+    //     {itemID : 5, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"},
+    //     {itemID : 6, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"},
+    //     {itemID : 7, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"},
+    //     {itemID : 8, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"},
+    //     {itemID : 9, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"},
+    //     {itemID : 10, itemName : "Screw", itemQty : 12, timeCreated: "22.22.2022"}
+    // ];
     const column = [
         {
-            name : "id",
+            name : "_id",
+            label : "_id",
+            options : {
+                display : false
+            }
+        },{
+            name : "itemID",
             label : "ID",
             options : {
                 filter : true,
@@ -42,7 +68,7 @@ function Dashboard(){
                 sort : false
             }
         },{
-            name : "itemQTY",
+            name : "itemQty",
             label : "Item Qty",
             options : {
                 filter : true,
@@ -60,36 +86,30 @@ function Dashboard(){
             label : "Action",
             options : {
                 filter : false,
-                sort : false
+                sort : false,
+                customBodyRender: (value, tableMeta, updateValue)=>{
+                    return (
+                        <Grid>
+                            <Button variant="contained" onClick={()=>{console.log(tableMeta.rowData[0])}} color="warning"> View Details</Button>
+                        </Grid>
+                      );
+                }
             }
         }
     ];
     const options = {
         download : false,
         print : false,
-        selectableRows: false
-      };
-
-    const data = [
-        {id : 1, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"},
-        {id : 2, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"},
-        {id : 3, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"},
-        {id : 4, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"},
-        {id : 5, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"},
-        {id : 6, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"},
-        {id : 7, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"},
-        {id : 8, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"},
-        {id : 9, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"},
-        {id : 10, itemName : "Screw", itemQTY : 12, timeCreated: "22.22.2022"}
-    ];
+        selectableRows: "none"
+    };
+    
     let theme = createTheme();
-
 
     return(
         <ThemeProvider theme={theme}>
             <MUIDataTable 
                 title={"Item Lists"} 
-                data={data} 
+                data={itemLists} 
                 columns={column} 
                 options={options} 
             />
@@ -131,7 +151,7 @@ function Dashboard(){
         //         />
         //     </Grid>
         // </Grid>
-    )
+    );
 }
 
 export default Dashboard;

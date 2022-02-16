@@ -29,7 +29,7 @@ router.get("/getItemList",(req,res)=>{
         if(!err){
             res.status(200).json(data);
         }else{
-            res.status(200).send("no item");
+            res.status(400).send("no item");
         }
     });
 });

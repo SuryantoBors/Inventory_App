@@ -90,7 +90,9 @@ function Dashboard(){
                 customBodyRender: (value, tableMeta, updateValue)=>{
                     return (
                         <Grid>
-                            <Button variant="contained" onClick={()=>{console.log(tableMeta.rowData[0])}} color="warning"> View Details</Button>
+                            <Button variant="contained" sx={{mr: 2}} onClick={()=>{console.log(tableMeta.rowData[0])}} color="warning"> View Details</Button>
+                            <Button variant="contained" sx={{mr: 2}} onClick={()=>{console.log(tableMeta.rowData[0])}} color="success"> Edit Details</Button>
+                            <Button variant="contained" onClick={()=>{console.log(tableMeta.rowData[0])}} color="error"> Delete Items</Button>
                         </Grid>
                       );
                 }
@@ -107,6 +109,7 @@ function Dashboard(){
 
     return(
         <ThemeProvider theme={theme}>
+            <Button sx={{margin :2}} variant="contained" color="warning" onClick={()=>{window.location = "/addProduct";}}>Add New Item</Button>
             <MUIDataTable 
                 title={"Item Lists"} 
                 data={itemLists} 

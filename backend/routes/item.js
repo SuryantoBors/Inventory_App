@@ -24,6 +24,18 @@ router.post("/createItem", (req,res)=>{
     });
 });
 
+router.delete("/deleteProdut/:itemId", (req,res)=>{
+    const reqItemId = req.params.itemId;
+
+    itemModel.findByIdAndDelete(reqItemId, (err, data)=>{
+        if (data) {
+            res.status(200).send(`Success deleted item ${reqItemId}`)
+        } else {
+            res.status(404).send(err);
+        }
+    });
+});
+
 router.get("/getItemList",(req,res)=>{
     itemModel.find({}, (err,data)=>{
         if(!err){

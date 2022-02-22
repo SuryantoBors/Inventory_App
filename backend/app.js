@@ -1,6 +1,6 @@
 //required package
 const express = require("express");
-const path = require("path")
+const path = require("path");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -16,12 +16,12 @@ dotenv.config();
 // mongoose.connect("mongodb://localhost:27017/user",(err)=>{;
 
 //mongobd atlas connection, get access using dotenv files
-mongoose.connect(`${process.env.MONGODB_ACCESS}`, (err)=>{
-    if (err) {
-        console.log(err);
-    }else{
-        console.log("success connect to database");
-    }
+mongoose.connect(`${process.env.MONGODB_ACCESS}`, (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("success connect to database");
+  }
 });
 
 app.use(express.json());
@@ -32,6 +32,6 @@ app.use("/signin", signin);
 app.use("/item/", itemCreation);
 
 //port listener, port using dotenv files
-app.listen(process.env.PORT, ()=>{
-    console.log(`listen from port ${process.env.PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`listen from port ${process.env.PORT}`);
 });

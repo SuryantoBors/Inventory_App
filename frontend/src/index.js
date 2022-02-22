@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import AppRoutes from './components/router.jsx';
+import React from "react";
+import ReactDOM from "react-dom";
+import AppRoutes from "./components/router.jsx";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppRoutes/>
+    <AppRoutes />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
